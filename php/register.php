@@ -3,24 +3,25 @@ if(isset($_POST['submit'])){
     $username = $_POST['fullname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $data = print_r($_POST);
-    echo $data;
-    registerUser($username, $email, $password);
+    
+registerUser($username, $email, $password);
  
 }
 
 function registerUser($username, $email, $password){
-    $file = 'C:\xampp\htdocs\xamppTest\userAuth\storage\users.csv';
+    $data = ['fullname'=> $username, 'email'=> $email, 'password'=>$password];
+    $file = '..\storage\users.csv';
     $cache = fopen($file, 'a');
-    if (putcsv($cache, $newdata)){
-        echo "Data saved successfully";
+    if (fputcsv($cache, $data)){
+        echo 'User successfully registered';
         echo "<br/>";
-    }
-    echo 'entry failed';
+    fclose($cache);
+    }else{
+    echo 'entry failed';}
 }
 
-// echo "HANDLE THIS PAGE";
-registerUser();
+echo "HANDLE THIS PAGE";
+
 
 
 
